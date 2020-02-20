@@ -1,0 +1,15 @@
+{
+  "preflight": [],
+  "setupassistant": [
+    {
+      "file": "/Library/installapplications/jamf-connect-login-bootstrap.pkg",
+      "hash": "72b827c196e487b8b66db9b47dbadc225edf146c63a178bee1855ea627f26840",
+      "name": "JamfConnectLogin",
+      "packageid": "com.captam3rica.jamf-connect-login-bootstrap",
+      "type": "package",
+      "url": "https://raw.githubusercontent.com/captam3rica/macos-bootstrap/master/payload/setupassistant/jamf-connect-login-bootstrap.pkg",
+      "version": "1.5"
+    }
+  ],
+  "userland": []
+}

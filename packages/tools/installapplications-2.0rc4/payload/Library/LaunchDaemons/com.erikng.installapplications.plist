@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.erikng.installapplications</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Library/installapplications/Python.framework/Versions/3.8/bin/python3</string>
+		<string>/Library/installapplications/installapplications.py</string>
+		<string>--jsonurl</string>
+		<string>https://raw.githubusercontent.com/captam3rica/macos-bootstrap/master/bootstrap.json</string>
+		<!-- <string>--iapath</string> -->
+		<!-- <string>/Library/Application Support/installapplications</string> -->
+		<!-- <string>--laidentifier</string> -->
+		<!-- <string>com.erikng.installapplications</string> -->
+		<!-- <string>--ldidentifier</string> -->
+		<!-- <string>com.erikng.installapplications</string> -->
+		<!-- <string>--depnotify</string> -->
+		<!-- <string>DEPNotifySkipStatus</string> -->
+		<!-- <string>Command: WindowTitle: InstallApplications is Awesome!</string> -->
+		<!-- <string>Command: NotificationOn:</string> -->
+		<!-- <string>Command: Quit: Thanks for using InstallApplications and DEPNotify.</string> -->
+		<!-- <string>Command: WindowStyle: ActivateOnStep</string> -->
+		<!-- <string>DEPNotifyPath: /Applications/Utilities/DEPNotify.app</string> -->
+		<!-- <string>DEPNotifyArguments: -munki</string> -->
+		<!-- <string>DEPNotifyArguments: -munki -fullScreen</string> -->
+		<!-- <string>--reboot</string> -->
+		<!-- <string>--skip-validation</string> -->
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StandardOutPath</key>
+	<string>/var/log/installapplications/installapplications.log</string>
+	<key>StandardErrorPath</key>
+	<string>/var/log/installapplications/installapplications.log</string>
+</dict>
+</plist>

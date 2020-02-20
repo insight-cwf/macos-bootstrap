@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EnableFDE</key>
+	<string>True</string>
+	<key>OIDCAdmin</key>
+	<string>Admin</string>
+	<key>OIDCAdminAttribute</key>
+	<string>roles</string>
+	<key>OIDCClientID</key>
+	<string>72c0906e-62c4-487b-abb7-f9bf51a6fe0b</string>
+	<key>OIDCNewPassword</key>
+	<false/>
+	<key>OIDCProvider</key>
+	<string>Azure</string>
+	<key>OIDCROPGID</key>
+	<string>72c0906e-62c4-487b-abb7-f9bf51a6fe0b</string>
+	<key>OIDCRedirectURI</key>
+	<string>https://127.0.0.1/jamfconnect</string>
+	<key>ScriptPath</key>
+	<string>/usr/local/bin/jamfconnectnotify_script.sh</string>
+</dict>
+</plist>
