@@ -43,8 +43,9 @@ and this project adheres to Year Notation Versioning.
 
 ### Fixed
 
-- turns out that this is only affecting my Mac :(
-- ~~Updates to `gerneratejson.py`. Fixed a bug where the bom file was being read incorrectly causing and error. Fixed a bug where some of the JSON information was not being serialized properly cause the bootstrap.json file to be created with errors.~~
+- Updates to `gerneratejson.py`. Fixed a bug where the bom file was being read incorrectly causing and error. Fixed a bug where some of the JSON information was not being serialized properly cause the bootstrap.json file to be created with errors.
+    - Myself and a coworking of mine saw the same issue when running the original script with python 3.7.3.
+    - I found the same result on vanilla installs of macOS and python3 as well.
 
 
 ## [2020-02-08]
