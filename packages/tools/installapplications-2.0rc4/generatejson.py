@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.8
 # -*- coding: utf-8 -*-
 
 # Generate Json file for installapplications
@@ -28,6 +28,7 @@ from xml.dom import minidom
 
 
 def gethash(filename):
+    """Return the package hash."""
     hash_function = hashlib.sha256()
     if not os.path.isfile(filename):
         return "FILE NOT FOUND - CHECK YOUR PATH"
@@ -45,24 +46,24 @@ def gethash(filename):
 def getpkginfopath(filename):
     """Extracts the package BOM with xar"""
     cmd = ["/usr/bin/xar", "-tf", filename]
-    proc = subprocess.Popen(
-        cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-    )
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (bom, err) = proc.communicate()
-    bom = bom.strip().split("\n")
-    if proc.returncode == 0:
+    try:
+        # Decode the byte stream and convert to list
+        bom = bom.decode("utf-8").split()
         for entry in bom:
             if entry.startswith("PackageInfo"):
                 return entry
             elif entry.endswith(".pkg/PackageInfo"):
                 return entry
-    else:
+    except Exception as e:
         print("Error: %s while extracting BOM for %s" % (err, filename))
+        SystemExit("Error: %s" % e)
 
 
 def extractpkginfo(filename):
-    """Takes input of a file path and returns a file path to the
-    extracted PackageInfo file."""
+    """Takes input of a file path and returns a file path to the extracted PackageInfo
+    file."""
     cwd = os.getcwd()
 
     if not os.path.isfile(filename):
@@ -75,17 +76,15 @@ def extractpkginfo(filename):
 
         extractedPkgInfoPath = os.path.join(tmpFolder, pkgInfoPath)
         cmd = ["/usr/bin/xar", "-xf", filename, pkgInfoPath]
-        proc = subprocess.Popen(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        )
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = proc.communicate()
         os.chdir(cwd)
         return extractedPkgInfoPath
 
 
 def getpkginfo(filename):
-    """Takes input of a file path and returns strings of the
-    package identifier and version from PackageInfo."""
+    """Takes input of a file path and returns strings of the package identifier and
+    version from PackageInfo."""
     if not os.path.isfile(filename):
         return "", ""
 
@@ -94,12 +93,15 @@ def getpkginfo(filename):
         dom = minidom.parse(pkgInfoPath)
         pkgRefs = dom.getElementsByTagName("pkg-info")
         for ref in pkgRefs:
-            pkgId = ref.attributes["identifier"].value.encode("UTF-8")
-            pkgVersion = ref.attributes["version"].value.encode("UTF-8")
+            # Removed UTF-8 encoding
+            pkgId = ref.attributes["identifier"].value
+            # Removed UTF-8 encoding
+            pkgVersion = ref.attributes["version"].value
             return pkgId, pkgVersion
 
 
 def main():
+    """Run the main logic."""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--base-url",
@@ -182,11 +184,7 @@ def main():
 
         # Determine the stage of the item to process - default to userland
         try:
-            if item["item-stage"] in (
-                "preflight",
-                "setupassistant",
-                "userland",
-            ):
+            if item["item-stage"] in ("preflight", "setupassistant", "userland"):
                 itemStage = item["item-stage"]
                 pass
             else:
@@ -219,9 +217,7 @@ def main():
                     "/Library/" "installapplications/userscripts/%s" % fileName
                 )
             else:
-                itemJson["file"] = (
-                    "/Library/" "installapplications/%s" % fileName
-                )
+                itemJson["file"] = "/Library/" "installapplications/%s" % fileName
             # Check crappy way of doing booleans
             try:
                 if item["script-do-not-wait"] in (
